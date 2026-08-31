@@ -1,0 +1,9 @@
+mcp 
+langchain 
+langgraph 
+python-dotenv
+langchain-groq
+pydantic
+langchain_mcp_adapters==0.3.2
+tavily-python
+requests
