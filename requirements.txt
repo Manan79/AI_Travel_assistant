@@ -1,9 +1,10 @@
-mcp 
-langchain 
-langgraph 
+mcp>=1.24.0,<2.0.0
+langchain
+langgraph
 python-dotenv
 langchain-groq
 pydantic
-langchain_mcp_adapters==0.3.2
+langchain_mcp_adapters==0.3.1
 tavily-python
 requests
+aviationstack-mcp==1.6.0
