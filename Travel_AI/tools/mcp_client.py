@@ -6,12 +6,27 @@ import os
 
 load_dotenv()
 
-client = MultiServerMCPClient(
-    {
-        "Tavily_MCP":{
-            "transport": "http",
-            "url": rf"https://mcp.tavily.com/mcp/?tavilyApiKey={os.environ['TAVILY_API_KEY']}",
-            
+
+
+async def main():
+    client = MultiServerMCPClient(
+        {
+            "Tavily_MCP":{
+                "transport": "http",
+                "url": rf"https://mcp.tavily.com/mcp/?tavilyApiKey={os.environ['TAVILY_API_KEY']}",
+                
+            },
+            "Railway_client":{
+                "transport": "streamable_http",
+                "url": "https://railway-mcp.amithv.xyz/mcp",
+            }
         }
-    }
-)
+    )
+    tools = await client.get_tools()
+
+    for tool in tools:
+        print(tool.name)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
