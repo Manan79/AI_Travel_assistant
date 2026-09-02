@@ -1,5 +1,4 @@
-from mcp_client import client
-import asyncio
+from .mcp_client import client
 
 
 # flights_with_airline
@@ -15,20 +14,17 @@ import asyncio
 # list_routes
 # list_taxes
 
-async def gettools():
-
+async def avaitation_tool():
     tools = await client.get_tools(server_name='Aviationstack_MCP')
-    flights_with_airline_tool = next(
-        t for t in tools
-            if t.name == 'flights_with_airline'
-    )
+    avaitation_tool = [
+        tool for tool in tools
+    ]
 
-    result = await flights_with_airline_tool.ainvoke({'airline_name': 'Indigo' , 'number_of_flights': 20})
-    print(result)
+    return avaitation_tool
 
 
 
     
 
-if __name__ == "__main__":
-    asyncio.run(gettools())
+# if __name__ == "__main__":
+#     asyncio.run(avaitation_tool())

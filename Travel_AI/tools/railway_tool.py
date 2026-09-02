@@ -2,12 +2,16 @@ import os
 import httpx
 from dotenv import load_dotenv
 import asyncio
+from langchain_core.tools import tool
 load_dotenv()
 
+
+@tool
 async def get_train_details(
     boarding_station: str,
     destination_station: str
 ):
+    """Return trains running between two stations."""
 
     async with httpx.AsyncClient() as client:
 
@@ -38,9 +42,9 @@ async def get_train_details(
             "running_days": train["train"]["runDays"]
         })
         
-        print(result)
+        return result
 
-if __name__ == "__main__":
-    asyncio.run(get_train_details(
-        boarding_station = 'JUC', destination_station = 'NDLS'
-    ))
+# if __name__ == "__main__":
+#     asyncio.run(get_train_details(
+#         boarding_station = 'JUC', destination_station = 'NDLS'
+#     ))

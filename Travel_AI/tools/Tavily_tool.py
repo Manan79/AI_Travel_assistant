@@ -1,8 +1,5 @@
 import asyncio
-# from dotenv import load_dotenv
-# import os
-from mcp_client import client
-
+from .mcp_client import client
 
 async def tavily_search():
 
@@ -13,9 +10,7 @@ async def tavily_search():
             if t.name == 'tavily_search'
     )
 
-    result = await search_tool.ainvoke({'query': "latest AI developments"})
+    return [search_tool] 
 
-    print(result)
-
-if __name__ == "__main__":
-    asyncio.run(tavily_search())
+# if __name__ == "__main__":
+#     asyncio.run(tavily_search())
