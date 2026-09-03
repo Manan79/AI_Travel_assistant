@@ -5,7 +5,6 @@ if __package__ in (None, ""):
 
 from Travel_AI.tools.Tavily_tool import tavily_search
 from langchain_openrouter import ChatOpenRouter
-from langchain_core.prompts import PromptTemplate
 from langchain.agents import create_agent
 import asyncio
 from dotenv import load_dotenv
@@ -21,12 +20,14 @@ Extract from the user's request:
 - destination/location
 - number of guests
 - rooms = number of guests / 2 
+- number of days (optional)
 - preferences (budget, rating, amenities, etc.)
 
 Rules:
 - Do not ask for information already provided.
 - Ask only for genuinely required missing information.
 - Use the hotel search tool when enough information is available.
+- Calculate the final budget like number of days x per night stay.
 - Respect the user's preferences when ranking hotels.
 - Never invent hotel details, prices, ratings, or availability.
 - Return the best matching options concisely with name, price, url , rating, location, and key features.
@@ -44,7 +45,7 @@ async def hotel_search_llm():
     )
 
     response = await agent.ainvoke(
-    {"messages": [{"role": "user", "content": f"Hi, I am looking for the hotels in Mysore near railway station for 1 person "}]},
+    {"messages": [{"role": "user", "content": f"Hi, I am looking for the hotels in Mysore for 1 person nearly for 4 days"}]},
 )
     print("===== FINAL MESSAGE =====")
     print(response["messages"][-1].content)
