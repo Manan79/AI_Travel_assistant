@@ -11,7 +11,9 @@ async def get_train_details(
     boarding_station: str,
     destination_station: str
 ):
-    """Return trains running between two stations."""
+    """Return Indian trains running between two stations.
+       Use this tool for retrieving the indian railways data only
+    """
 
     async with httpx.AsyncClient() as client:
 
