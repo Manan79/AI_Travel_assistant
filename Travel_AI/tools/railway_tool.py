@@ -6,20 +6,18 @@ from langchain_core.tools import tool
 import json
 load_dotenv()
 
-import requests
 
+# async def get_station_code(station: str):
+#     with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
+#         stations_list = json.load(f)
 
-async def get_station_code(station: str):
-    with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
-        stations_list = json.load(f)
+#     stations = {
+#         station["name"].strip(): station["code"]
+#         for station in stations_list
+#     }
+#     code = stations[station]
 
-    stations = {
-        station["name"].strip(): station["code"]
-        for station in stations_list
-    }
-    code = stations[station]
-
-    return code
+#     return code
 
 
 @tool
@@ -27,16 +25,22 @@ async def get_train_details(
     boarding_station: str,
     destination_station: str
 ):
-    """Return Indian trains running between two stations and this tool only expects the Railway station codes.
+    """Return Indian trains running between two stations.
        Use this tool for retrieving the indian railways data only
+
+
+    args:
+        Accepts the station codes only
     """
 
-    bs = await get_station_code(boarding_station)
-    ds = await get_station_code(destination_station)
+    # bs = await get_station_code(boarding_station)
+    # ds = await get_station_code(destination_station)
+    bs = boarding_station
+    ds = destination_station
 
     print(f"Finding Trains between {bs} to {ds}")
 
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=30.0) as client:
 
         response = await client.get(
             f"https://api.railradar.in/v1/trains/between/"
@@ -67,10 +71,3 @@ async def get_train_details(
         
         return result
 
-# if __name__ == "__main__":
-#     asyncio.run(
-#         get_train_details(
-#             boarding_station = 'Jalandhar City',
-#             destination_station = "Delhi"
-#         )
-#     )

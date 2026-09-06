@@ -35,6 +35,9 @@ Rules:
 """
 
 async def hotel_search_llm(state):
+
+    print("===== Hotel Agent Started =====")
+
     tools = await tavily_search()
 
 

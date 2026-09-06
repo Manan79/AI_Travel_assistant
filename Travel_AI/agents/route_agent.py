@@ -4,7 +4,6 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from Travel_AI.tools.flight_tool import avaitation_tool
 from Travel_AI.tools.railway_tool import get_train_details
-from langchain_groq import ChatGroq
 from langchain_openrouter import ChatOpenRouter
 from langchain_core.prompts import PromptTemplate
 from langchain.agents import create_agent
@@ -44,8 +43,6 @@ IMPORTANT:
 - If the user is open to both or no preference, use both tools.
 - Never invent transportation information.
 
-The application may provide a default origin of New Delhi if the user does not
-specify an origin.
 
 After receiving tool results, compare the options and provide a concise
 recommendation.
@@ -55,6 +52,9 @@ prompt = PromptTemplate.from_template(ROUTE_SELECTION_PROMPT)
 
 
 async def route_llm(state):
+
+    print("===== Route Agent Started =====")
+
     tools = await all_tools()
     agent = create_agent(
         model = LLM,
