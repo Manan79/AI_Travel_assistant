@@ -17,10 +17,7 @@ async def get_station_code(station: str):
         station["name"].strip(): station["code"]
         for station in stations_list
     }
-    try: 
-        code = stations[station]
-    except:
-        pass
+    code = stations[station]
 
     return code
 
