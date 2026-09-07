@@ -5,12 +5,11 @@ if __package__ in (None, ""):
 
 from Travel_AI.tools.Tavily_tool import tavily_search
 from langchain_openrouter import ChatOpenRouter
-from langchain.agents import create_agent
 import asyncio
+import json
 from dotenv import load_dotenv
 from typing import List , Optional
-from pydantic import BaseModel , Field
-from datetime import date, timedelta
+from pydantic import BaseModel , Field, model_validator
 load_dotenv()
 
 LLM = ChatOpenRouter(model = 'minimax/minimax-m2.7:free')
@@ -35,11 +34,29 @@ class PlaceFinderOutput(BaseModel):
     places_in_destination: List[Place]
     nearby_places: List[Place]
 
-async def place_finder_llm():
+    @model_validator(mode="before")
+    @classmethod
+    def decode_json_lists(cls, values):
+        if not isinstance(values, dict):
+            return values
+
+        for field_name in ("places_in_destination", "nearby_places"):
+            field_value = values.get(field_name)
+            if isinstance(field_value, str):
+                try:
+                    values[field_name] = json.loads(field_value)
+                except json.JSONDecodeError:
+                    pass
+        return values
+
+async def place_finder_llm(state):
+
+    print("===== Place Finder Started =====")
+
     tools = await tavily_search()
 
     result = await tools[0].ainvoke({
-        "query": "top tourist places in Amritsar"
+        "query": state['destination_station']
     })
     structured_llm = LLM.with_structured_output(PlaceFinderOutput)
 
@@ -50,14 +67,15 @@ async def place_finder_llm():
 
         SEARCH RESULTS:
         {result}
+
+        Number of days:
+        {state['duration']}
         """
     )
 
-    print(structured_result)
+    return {"place_selection" : str(structured_result)}
+    
 
 
 
 
-
-if __name__ == "__main__":
-    asyncio.run(place_finder_llm())

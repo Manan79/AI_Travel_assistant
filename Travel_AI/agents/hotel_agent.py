@@ -8,7 +8,7 @@ from langchain_openrouter import ChatOpenRouter
 from langchain.agents import create_agent
 import asyncio
 from dotenv import load_dotenv
-from datetime import date, timedelta
+# from datetime import date, timedelta
 load_dotenv()
 
 LLM = ChatOpenRouter(model = 'minimax/minimax-m2.7:free')
@@ -34,7 +34,10 @@ Rules:
 - Suggest atmost 5 hotels
 """
 
-async def hotel_search_llm():
+async def hotel_search_llm(state):
+
+    print("===== Hotel Agent Started =====")
+
     tools = await tavily_search()
 
 
@@ -45,14 +48,27 @@ async def hotel_search_llm():
     )
 
     response = await agent.ainvoke(
-    {"messages": [{"role": "user", "content": f"Hi, I am looking for the hotels in Mysore for 1 person nearly for 4 days"}]},
-)
-    print("===== FINAL MESSAGE =====")
-    print(response["messages"][-1].content)
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        f"Place: {state['destination_station']}\n"
+                        f"Number of days: {state['duration']}\n"
+                        f"Number of guests: {state['number_guest']}"
+                    ),
+                }
+            ]
+        }
+    )
+    print("===== Hotel Agent Result =====")
+    # return (response["messages"][-1].content)
+    return {'hotel_agent_response': str(response["messages"][-1].content)}
 
 
 
 
 
-if __name__ == "__main__":
-    asyncio.run(hotel_search_llm())
+
+# if __name__ == "__main__":
+#     asyncio.run(hotel_search_llm())

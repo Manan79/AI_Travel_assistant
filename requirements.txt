@@ -9,3 +9,4 @@ tavily-python
 requests
 aviationstack-mcp==1.6.0
 langchain-openrouter
+langchain-google-genai
