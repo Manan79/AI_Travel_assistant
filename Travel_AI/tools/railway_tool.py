@@ -7,17 +7,6 @@ import json
 load_dotenv()
 
 
-# async def get_station_code(station: str):
-#     with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
-#         stations_list = json.load(f)
-
-#     stations = {
-#         station["name"].strip(): station["code"]
-#         for station in stations_list
-#     }
-#     code = stations[station]
-
-#     return code
 
 
 @tool
@@ -33,8 +22,6 @@ async def get_train_details(
         Accepts the station codes only
     """
 
-    # bs = await get_station_code(boarding_station)
-    # ds = await get_station_code(destination_station)
     bs = boarding_station
     ds = destination_station
 
