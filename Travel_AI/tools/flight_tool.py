@@ -1,30 +1,35 @@
+from langchain_core.tools import tool
+
 from .mcp_client import client
 
 
-# flights_with_airline
-# historical_flights_by_date
-# flight_arrival_departure_schedule
-# future_flights_arrival_departure_schedule
-# random_aircraft_type
-# random_airplanes_detailed_info
-# random_countries_detailed_info
-# random_cities_detailed_info
-# list_airports
-# list_airlines
-# list_routes
-# list_taxes
+@tool
+async def search_flights(
+    departure_airport: str,
+    arrival_airport: str,
+    limit: int = 10,
+):
+    """Find flight routes between two airports.
 
-async def avaitation_tool():
-    tools = await client.get_tools(server_name='Aviationstack_MCP')
-    avaitation_tool = [
-        tool for tool in tools
-    ]
+    Use three-letter IATA airport codes, for example DEL for New Delhi
+    and IXJ for Jammu. This tool returns route data from Aviationstack.
+    """
+    if limit < 1:
+        raise ValueError("limit must be at least 1")
 
-    return avaitation_tool
+    aviation_tools = await client.get_tools(server_name="Aviationstack_MCP")
+    route_tool = next(
+        (tool for tool in aviation_tools if tool.name == "list_routes"),
+        None,
+    )
 
+    if route_tool is None:
+        raise RuntimeError("Aviationstack MCP does not provide the list_routes tool")
 
-
-    
-
-# if __name__ == "__main__":
-#     asyncio.run(avaitation_tool())
+    return await route_tool.ainvoke(
+        {
+            "dep_iata": departure_airport.strip().upper(),
+            "arr_iata": arrival_airport.strip().upper(),
+            "limit": limit,
+        }
+    )

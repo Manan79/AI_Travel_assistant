@@ -72,11 +72,19 @@
     "code": "KLK"
   },
   {
+    "name": "Jammu",
+    "code": "JAT"
+  },
+    {
     "name": "Jammu Tawi",
     "code": "JAT"
   },
   {
     "name": "Shri Mata Vaishno Devi Katra",
+    "code": "SVDK"
+  },
+  {
+    "name": "Katra",
     "code": "SVDK"
   },
   {

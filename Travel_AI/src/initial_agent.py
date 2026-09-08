@@ -8,7 +8,7 @@ load_dotenv()
 
 
 
-LLM = ChatGroq(model= 'qwen/qwen3.6-27b')
+LLM = ChatGroq(model= 'openai/gpt-oss-120b')
 
 class StructuredLLM(BaseModel):
     boarding_station: str = Field(
@@ -24,7 +24,6 @@ class StructuredLLM(BaseModel):
         description="Duration of the trip in days"
     )
     transport: str = Field(
-        default='Train',
         description= "Mode of travelling"
     )
 
@@ -39,7 +38,7 @@ async def processing_query(state):
     2. destination_station
     3. number_guest
     4. duration
-    5. Mode of transport (default Train)
+    5. Mode of transport
 
     User_query: {user_query}
 
@@ -54,7 +53,11 @@ async def processing_query(state):
 
     3. If user donot clearly specify the source then take the capital city of the place
         - ex:- Make an plan from punjab to Rameshwaram, Source = 'Chandigarh'
+    4. Mode of Transport
+        if the destination_station and boarding_station is in India then Train, Flight
+        if the boarding_station or destination_station is not in India then Flight only.
 """)
     message = prompt.format(user_query = state['user_query'])
     response = await structured_llm_response.ainvoke(message)
+    print("Intital Agent Responded")
     return response.model_dump()

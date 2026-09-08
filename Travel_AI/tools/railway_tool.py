@@ -7,17 +7,17 @@ import json
 load_dotenv()
 
 
-# async def get_station_code(station: str):
-#     with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
-#         stations_list = json.load(f)
+async def get_station_code(station: str):
+    with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
+        stations_list = json.load(f)
 
-#     stations = {
-#         station["name"].strip(): station["code"]
-#         for station in stations_list
-#     }
-#     code = stations[station]
+    stations = {
+        station["name"].strip(): station["code"]
+        for station in stations_list
+    }
+    code = stations[station]
 
-#     return code
+    return code
 
 
 @tool
@@ -26,17 +26,16 @@ async def get_train_details(
     destination_station: str
 ):
     """Return Indian trains running between two stations.
-       Use this tool for retrieving the indian railways data only
-
-
+    IMPORTANT RULE:
+    Use this tool only if the source and destination is in India
     args:
-        Accepts the station codes only
+        Accepts the station names only
     """
 
-    # bs = await get_station_code(boarding_station)
-    # ds = await get_station_code(destination_station)
-    bs = boarding_station
-    ds = destination_station
+    bs = await get_station_code(boarding_station)
+    ds = await get_station_code(destination_station)
+    # bs = boarding_station
+    # ds = destination_station
 
     print(f"Finding Trains between {bs} to {ds}")
 

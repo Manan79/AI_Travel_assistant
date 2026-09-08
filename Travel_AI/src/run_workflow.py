@@ -8,13 +8,15 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from dotenv import load_dotenv
+from typing import Annotated , List
+from langgraph.graph import add_messages
 from langgraph.graph import END, START, StateGraph
-
-from Travel_AI.agents.hotel_agent import hotel_search_llm
-from Travel_AI.agents.place_finder import place_finder_llm
-from Travel_AI.agents.route_agent import route_llm
-from Travel_AI.agents.iternary_agent import iternary_agent
+from langgraph.prebuilt.tool_node import ToolNode
+from langgraph.prebuilt.tool_node import tools_condition
 from Travel_AI.src.initial_agent import processing_query
+from Travel_AI.src.react_agent import react_agent, all_tools
+from Travel_AI.agents.iternary_agent import iternary_agent
+
 
 load_dotenv()
 
@@ -30,24 +32,34 @@ class MainWorkflow(TypedDict):
     hotel_agent_response: str
     route_selection: str
     itinerary: str
+    messages: Annotated[list, add_messages]
 
 
 
 def build_workflow():
     graph = StateGraph(MainWorkflow)
     graph.add_node("Query Processor", processing_query)
-    graph.add_node("Hotel Searching Agent", hotel_search_llm)
-    graph.add_node("Place Finder Agent", place_finder_llm)
-    graph.add_node("Route Decider Agent", route_llm)
-    graph.add_node("Itinerary Generator Agent", iternary_agent)
-    graph.add_edge(START, "Query Processor")
-    graph.add_edge("Query Processor", "Hotel Searching Agent")
-    graph.add_edge("Query Processor", "Place Finder Agent")
-    graph.add_edge("Query Processor", "Route Decider Agent")
-    graph.add_edge("Route Decider Agent", "Itinerary Generator Agent")
-    graph.add_edge("Place Finder Agent", "Itinerary Generator Agent")
-    graph.add_edge("Hotel Searching Agent", "Itinerary Generator Agent")
-    graph.add_edge("Itinerary Generator Agent", END)
+    graph.add_node("Brain Agent" , react_agent)
+    graph.add_node("tools", ToolNode(all_tools))
+    graph.add_node("Iternary_agent" , iternary_agent)
+
+
+    graph.add_edge(START , "Query Processor")
+    graph.add_edge("Query Processor" , "Brain Agent")
+
+    graph.add_conditional_edges(
+    "Brain Agent",
+    tools_condition,  # Routes to "tools" or "__end__"
+    {
+        "tools": "tools",
+        "__end__": "Iternary_agent"
+    }
+)   
+    # graph.add_edge("Brain Agent" , "Iternary_agent")
+    graph.add_edge("tools", "Brain Agent")
+    graph.add_edge("Iternary_agent" , END)
+
+
     checkpointer = InMemorySaver()
     
     return graph.compile(checkpointer= checkpointer)
@@ -56,9 +68,9 @@ def build_workflow():
 async def workflow_invoke():
     
     workflow = build_workflow()
-    config = {"configurable": {"thread_id": "1"}}
+    config = {"configurable": {"thread_id": "3"}}
     result = await workflow.ainvoke({
-            "user_query": "Hi I planning a trip from New Delhi to Goa for 4 days alone through train",
+            "user_query": "Hi, Plan a trip guide for from Mumbai to Switzerland for 5 days for 2 persons. ",
         },
             config = config
         )
@@ -67,3 +79,9 @@ async def workflow_invoke():
 
 if __name__ == "__main__":
     asyncio.run(workflow_invoke())
+    # graph = graph.compile()
+    # graph_image = graph.get_graph().draw_mermaid_png()
+
+    # with open("travel_ai_graph.png", "wb") as f:
+    #     f.write(graph_image)
+
