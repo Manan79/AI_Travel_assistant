@@ -12,7 +12,7 @@ from typing import List , Optional
 from pydantic import BaseModel , Field, model_validator
 load_dotenv()
 
-LLM = ChatOpenRouter(model = 'minimax/minimax-m2.7:free')
+LLM = ChatOpenRouter(model = 'gpt-4o-mini')
 
 class TransportOption(BaseModel):
     mode: str = Field(description="Bus, train, taxi, cab, etc.")

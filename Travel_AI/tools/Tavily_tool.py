@@ -2,6 +2,7 @@ import asyncio
 from .mcp_client import client
 
 async def tavily_search():
+    """ Search tool used to seach information accross the web  """
 
     tools = await client.get_tools()
 

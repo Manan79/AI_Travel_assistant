@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from Travel_AI.tools.flight_tool import avaitation_tool
+from Travel_AI.tools.flight_tool import search_flights
 from Travel_AI.tools.railway_tool import get_train_details
 from langchain_openrouter import ChatOpenRouter
 from langchain_core.prompts import PromptTemplate
@@ -13,13 +13,13 @@ from datetime import date
 
 load_dotenv()
 
-LLM = ChatOpenRouter(model = 'minimax/minimax-m2.7:free')
+LLM = ChatOpenRouter(model = 'gpt-4o-mini')
 
 # Add one day to get tomorrow
 today = date.today()
 
 async def all_tools():
-    avaitation = await avaitation_tool()
+    avaitation = [search_flights]
     railway = [get_train_details]
 
     all_tools = avaitation + railway

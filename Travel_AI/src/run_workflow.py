@@ -56,9 +56,9 @@ def build_workflow():
 async def workflow_invoke():
     
     workflow = build_workflow()
-    config = {"configurable": {"thread_id": "1"}}
+    config = {"configurable": {"thread_id": "3"}}
     result = await workflow.ainvoke({
-            "user_query": "Hi I planning a trip from New Delhi to Goa for 4 days alone through train",
+            "user_query": "Hi I planning a trip of USA from India alone for 7 days",
         },
             config = config
         )

@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 # from datetime import date, timedelta
 load_dotenv()
 
-LLM = ChatOpenRouter(model = 'minimax/minimax-m2.7:free')
+LLM = ChatOpenRouter(model = 'gpt-4o-mini')
 
 HOTEL_SELECTION_PROMPT = """
 You are a hotel search agent.

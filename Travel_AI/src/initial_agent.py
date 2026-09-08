@@ -24,7 +24,6 @@ class StructuredLLM(BaseModel):
         description="Duration of the trip in days"
     )
     transport: str = Field(
-        default='Train',
         description= "Mode of travelling"
     )
 
@@ -39,7 +38,7 @@ async def processing_query(state):
     2. destination_station
     3. number_guest
     4. duration
-    5. Mode of transport (default Train)
+    5. Mode of transport 
 
     User_query: {user_query}
 
@@ -54,6 +53,7 @@ async def processing_query(state):
 
     3. If user donot clearly specify the source then take the capital city of the place
         - ex:- Make an plan from punjab to Rameshwaram, Source = 'Chandigarh'
+    4. If the source and destination is in India, then you can use the railway tool.
 """)
     message = prompt.format(user_query = state['user_query'])
     response = await structured_llm_response.ainvoke(message)
