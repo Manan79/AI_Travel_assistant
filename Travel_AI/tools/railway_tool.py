@@ -1,22 +1,30 @@
+import json
 import os
+from pathlib import Path
 import httpx
 from dotenv import load_dotenv
-import asyncio
 from langchain_core.tools import tool
-import json
 load_dotenv()
 
+STATIONS_FILE = Path(__file__).with_name("indian_railway_stations.json")
 
-async def get_station_code(station: str):
-    with open(r"Travel_AI\tools\indian_railway_stations.json", "r", encoding="utf-8") as f:
-        stations_list = json.load(f)
 
-    stations = {
-        station["name"].strip(): station["code"]
-        for station in stations_list
+def _station_code(station: str) -> str:
+    station = station.strip()
+    if not station:
+        raise ValueError("Station must not be empty")
+    if len(station) <= 5 and station.upper() == station:
+        return station
+
+    with STATIONS_FILE.open(encoding="utf-8") as file:
+        stations = json.load(file)
+    station_names = {
+        item["name"].strip().casefold(): item["code"].upper()
+        for item in stations
     }
-    code = stations[station]
-
+    code = station_names.get(station.casefold())
+    if code is None:
+        raise ValueError(f"Station '{station}' was not found in the station data")
     return code
 
 
@@ -25,17 +33,12 @@ async def get_train_details(
     boarding_station: str,
     destination_station: str
 ):
-    """Return Indian trains running between two stations.
-    IMPORTANT RULE:
-    Use this tool only if the source and destination is in India
-    args:
-        Accepts the station names only
-    """
-
-    bs = await get_station_code(boarding_station)
-    ds = await get_station_code(destination_station)
-    # bs = boarding_station
-    # ds = destination_station
+    """Find Indian trains between two station names or station codes."""
+    bs = _station_code(boarding_station)
+    ds = _station_code(destination_station)
+    api_key = os.environ.get("RAILRADAR_API_KEY")
+    if not api_key:
+        raise RuntimeError("RAILRADAR_API_KEY is not configured")
 
     print(f"Finding Trains between {bs} to {ds}")
 
@@ -45,7 +48,7 @@ async def get_train_details(
             f"https://api.railradar.in/v1/trains/between/"
             f"{bs}/{ds}",
             headers={
-                "Authorization": os.environ["RAILRADAR_API_KEY"]
+                "Authorization": api_key
             }
         )
 
@@ -53,7 +56,7 @@ async def get_train_details(
 
         data = response.json()
 
-        trains = data['data']['trains']
+        trains = data.get("data", {}).get("trains", [])
         result = []
 
         for train in trains:

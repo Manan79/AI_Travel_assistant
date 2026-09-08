@@ -23,6 +23,10 @@ class StructuredLLM(BaseModel):
     duration: int = Field(
         description="Duration of the trip in days"
     )
+    travel_date: str = Field(
+        default="",
+        description="Departure date in YYYY-MM-DD format when provided"
+    )
     transport: str = Field(
         description= "Mode of travelling"
     )
@@ -56,6 +60,8 @@ async def processing_query(state):
     4. Mode of Transport
         if the destination_station and boarding_station is in India then Train, Flight
         if the boarding_station or destination_station is not in India then Flight only.
+    5. Extract the departure date in YYYY-MM-DD format when provided.
+       If no date is provided, return an empty string.
 """)
     message = prompt.format(user_query = state['user_query'])
     response = await structured_llm_response.ainvoke(message)
