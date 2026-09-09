@@ -1,81 +1,64 @@
-import asyncio
+from langgraph.graph import END, START, StateGraph
 import sys
 from pathlib import Path
-from typing import TypedDict
-from langgraph.checkpoint.memory import InMemorySaver
-
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
-from dotenv import load_dotenv
-from typing import Annotated , List
-from langgraph.graph import add_messages
-from langgraph.graph import END, START, StateGraph
+from langsmith import traceable
 from langgraph.prebuilt.tool_node import ToolNode
 from langgraph.prebuilt.tool_node import tools_condition
 from Travel_AI.src.initial_agent import processing_query
 from Travel_AI.src.react_agent import react_agent, all_tools
-from Travel_AI.agents.iternary_agent import iternary_agent
-
-
-load_dotenv()
-
-
-class MainWorkflow(TypedDict):
-    user_query: str
-    boarding_station: str
-    destination_station: str
-    number_guest: int
-    duration: int
-    transport: str
-    place_selection: str
-    hotel_agent_response: str
-    route_selection: str
-    itinerary: str
-    messages: Annotated[list, add_messages]
-
+from Travel_AI.agents.iternary_agent import iternary_generator
+from Travel_AI.src.main_state import MainWorkflow
+from langgraph.checkpoint.memory import InMemorySaver
+import asyncio
 
 
 def build_workflow():
     graph = StateGraph(MainWorkflow)
     graph.add_node("Query Processor", processing_query)
-    graph.add_node("Brain Agent" , react_agent)
+    graph.add_node("Brain Agent", react_agent)
     graph.add_node("tools", ToolNode(all_tools))
-    graph.add_node("Iternary_agent" , iternary_agent)
+    graph.add_node("Iternary_agent", iternary_generator)
 
-
-    graph.add_edge(START , "Query Processor")
-    graph.add_edge("Query Processor" , "Brain Agent")
+    graph.add_edge(START, "Query Processor")
+    graph.add_edge("Query Processor", "Brain Agent")
 
     graph.add_conditional_edges(
-    "Brain Agent",
-    tools_condition,  # Routes to "tools" or "__end__"
-    {
-        "tools": "tools",
-        "__end__": "Iternary_agent"
-    }
-)   
-    # graph.add_edge("Brain Agent" , "Iternary_agent")
-    graph.add_edge("tools", "Brain Agent")
-    graph.add_edge("Iternary_agent" , END)
+        "Brain Agent",
+        tools_condition,
+        {
+            "tools": "tools",
+            "__end__": "Iternary_agent",
+        },
+    )
 
+    graph.add_edge("tools", "Brain Agent")
+    graph.add_edge("Iternary_agent", END)
 
     checkpointer = InMemorySaver()
-    
-    return graph.compile(checkpointer= checkpointer)
+    return graph.compile(checkpointer=checkpointer)
 
-
+@traceable
 async def workflow_invoke():
-    
     workflow = build_workflow()
-    config = {"configurable": {"thread_id": "33"}}
-    result = await workflow.ainvoke({
-            "user_query": "Hi, plan a trip from Mumbai to Thailand for 5 days for 2 person starting from 15-09-2026",
-        },
-            config = config
-        )
+    config = {"configurable": {"thread_id": "10"}}
 
-    print(result['itinerary'])
+    initial_state = {
+        "user_query": "Hi, plan a trip from Mumbai to Australia for 5 days for 2 person starting",
+        "messages": [],
+    }
+
+    # result = await workflow.ainvoke(initial_state, config=config)
+    # print(result.get('itinerary', ''))
+
+    async for chunk in workflow.astream(
+        initial_state,
+        config=config,
+        stream_mode="messages",
+    ):
+       message, metadata = chunk
+       print(message.content, end="", flush=True)
 
 if __name__ == "__main__":
     asyncio.run(workflow_invoke())
