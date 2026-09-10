@@ -24,12 +24,22 @@ def build_workflow():
     graph.add_edge(START, "Query Processor")
     graph.add_edge("Query Processor", "Brain Agent")
 
+<<<<<<< HEAD
     graph.add_conditional_edges(
         "Brain Agent",
         tools_condition,
         {
             "tools": "tools",
             "__end__": "Iternary_agent",
+=======
+
+async def workflow_invoke():
+    
+    workflow = build_workflow()
+    config = {"configurable": {"thread_id": "3"}}
+    result = await workflow.ainvoke({
+            "user_query": "Hi I planning a trip of USA from India alone for 7 days",
+>>>>>>> main
         },
     )
 

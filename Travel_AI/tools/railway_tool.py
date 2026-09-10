@@ -8,6 +8,7 @@ load_dotenv()
 
 STATIONS_FILE = Path(__file__).with_name("indian_railway_stations.json")
 
+<<<<<<< HEAD
 
 # def _station_code(station: str) -> str:
 #     station = station.strip()
@@ -26,6 +27,8 @@ STATIONS_FILE = Path(__file__).with_name("indian_railway_stations.json")
 #     if code is None:
 #         raise ValueError(f"Station '{station}' was not found in the station data")
 #     return code
+=======
+>>>>>>> main
 
 
 @tool
@@ -40,8 +43,11 @@ async def get_train_details(
     for ex Jalandhar city -> JUC
     """
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
     bs = boarding_station
     ds = destination_station
     # bs = _station_code(boarding_station)
