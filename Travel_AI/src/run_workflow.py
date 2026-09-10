@@ -39,7 +39,6 @@ def build_workflow():
     checkpointer = InMemorySaver()
     return graph.compile(checkpointer=checkpointer)
 
-
 @traceable
 async def workflow_invoke():
     workflow = build_workflow()
@@ -50,14 +49,16 @@ async def workflow_invoke():
         "messages": [],
     }
 
+    # result = await workflow.ainvoke(initial_state, config=config)
+    # print(result.get('itinerary', ''))
+
     async for chunk in workflow.astream(
         initial_state,
         config=config,
         stream_mode="messages",
     ):
-        message, metadata = chunk
-        print(message.content, end="", flush=True)
-
+       message, metadata = chunk
+       print(message.content, end="", flush=True)
 
 if __name__ == "__main__":
     asyncio.run(workflow_invoke())
