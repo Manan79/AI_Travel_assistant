@@ -8,7 +8,7 @@ load_dotenv()
 
 
 
-LLM = ChatGroq(model= 'qwen/qwen3.6-27b')
+LLM = ChatGroq(model='openai/gpt-oss-120b')
 
 class StructuredLLM(BaseModel):
     boarding_station: str = Field(
@@ -23,12 +23,19 @@ class StructuredLLM(BaseModel):
     duration: int = Field(
         description="Duration of the trip in days"
     )
+
     transport: str = Field(
         description= "Mode of travelling"
     )
+    country: str = Field(
+        description="Which country is the user travelling to"
+    )
 
 
-structured_llm_response = LLM.with_structured_output(StructuredLLM)
+structured_llm_response = LLM.with_structured_output(
+    StructuredLLM,
+    method='json_schema',
+)
 
 
 async def processing_query(state):
@@ -38,7 +45,11 @@ async def processing_query(state):
     2. destination_station
     3. number_guest
     4. duration
+<<<<<<< HEAD
+    5. Country
+=======
     5. Mode of transport 
+>>>>>>> main
 
     User_query: {user_query}
 
@@ -53,8 +64,15 @@ async def processing_query(state):
 
     3. If user donot clearly specify the source then take the capital city of the place
         - ex:- Make an plan from punjab to Rameshwaram, Source = 'Chandigarh'
+<<<<<<< HEAD
+
+    4. If the boarding_station and destination_station lies in india then set the country to india,
+        otherwise set the country Abroad.
+=======
     4. If the source and destination is in India, then you can use the railway tool.
+>>>>>>> main
 """)
-    message = prompt.format(user_query = state['user_query'])
+    message = prompt.format(user_query = state.get('user_query', ''))
     response = await structured_llm_response.ainvoke(message)
+    print("Intital Agent Responded")
     return response.model_dump()

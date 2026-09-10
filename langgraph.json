@@ -1,0 +1,9 @@
+{
+  "python_version": "3.13",
+  "dependencies": [
+    "."
+  ],
+  "graphs": {
+    "travel_workflow": "Travel_AI.src.run_workflow:build_workflow"
+  }
+}

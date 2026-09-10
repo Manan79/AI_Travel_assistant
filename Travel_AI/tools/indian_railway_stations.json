@@ -1,0 +1,1154 @@
+[
+  {
+    "name": "New Delhi",
+    "code": "NDLS"
+  },
+  {
+    "name": "Delhi ",
+    "code": "DLI"
+  },
+  {
+    "name": "Hazrat Nizamuddin",
+    "code": "NZM"
+  },
+  {
+    "name": "Anand Vihar Terminal",
+    "code": "ANVT"
+  },
+  {
+    "name": "Delhi ",
+    "code": "DEC"
+  },
+  {
+    "name": "Ghaziabad",
+    "code": "GZB"
+  },
+  {
+    "name": "Faridabad",
+    "code": "FDB"
+  },
+  {
+    "name": "Gurugram",
+    "code": "GGN"
+  },
+  {
+    "name": "Gurgaon",
+    "code": "GGN"
+  },
+  {
+    "name": "Amritsar ",
+    "code": "ASR"
+  },
+  {
+    "name": "Jalandhar ",
+    "code": "JUC"
+  },
+  {
+    "name": "Ludhiana ",
+    "code": "LDH"
+  },
+  {
+    "name": "Pathankot ",
+    "code": "PTK"
+  },
+  {
+    "name": "Bathinda ",
+    "code": "BTI"
+  },
+  {
+    "name": "Patiala",
+    "code": "PTA"
+  },
+  {
+    "name": "Chandigarh",
+    "code": "CDG"
+  },
+  {
+    "name": "Ambala ",
+    "code": "UMB"
+  },
+  {
+    "name": "Kalka",
+    "code": "KLK"
+  },
+  {
+    "name": "Jammu",
+    "code": "JAT"
+  },
+    {
+    "name": "Jammu Tawi",
+    "code": "JAT"
+  },
+  {
+    "name": "Shri Mata Vaishno Devi Katra",
+    "code": "SVDK"
+  },
+  {
+    "name": "Katra",
+    "code": "SVDK"
+  },
+  {
+    "name": "Udhampur",
+    "code": "UHP"
+  },
+  {
+    "name": "Pathankot ",
+    "code": "PTKC"
+  },
+  {
+    "name": "Una Himachal",
+    "code": "UHL"
+  },
+  {
+    "name": "Anandpur Sahib",
+    "code": "ANSB"
+  },
+  {
+    "name": "Batala ",
+    "code": "BAT"
+  },
+  {
+    "name": "Beas",
+    "code": "BEAS"
+  },
+  {
+    "name": "Firozpur ",
+    "code": "FZR"
+  },
+  {
+    "name": "Sirhind",
+    "code": "SIR"
+  },
+  {
+    "name": "Jaipur ",
+    "code": "JP"
+  },
+  {
+    "name": "Jodhpur ",
+    "code": "JU"
+  },
+  {
+    "name": "Udaipur ",
+    "code": "UDZ"
+  },
+  {
+    "name": "Ajmer ",
+    "code": "AII"
+  },
+  {
+    "name": "Kota ",
+    "code": "KOTA"
+  },
+  {
+    "name": "Bikaner ",
+    "code": "BKN"
+  },
+  {
+    "name": "Jaisalmer",
+    "code": "JSM"
+  },
+  {
+    "name": "Alwar",
+    "code": "AWR"
+  },
+  {
+    "name": "Abu Road",
+    "code": "ABR"
+  },
+  {
+    "name": "Mount Abu",
+    "code": "ABR"
+  },
+  {
+    "name": "Bharatpur",
+    "code": "BTE"
+  },
+  {
+    "name": "Sawai Madhopur",
+    "code": "SWM"
+  },
+  {
+    "name": "Ranakpur",
+    "code": "RANI"
+  },
+  {
+    "name": "Chittorgarh",
+    "code": "COR"
+  },
+  {
+    "name": "Bhilwara",
+    "code": "BHL"
+  },
+  {
+    "name": "Pushkar",
+    "code": "AII"
+  },
+  {
+    "name": "Lucknow",
+    "code": "LKO"
+  },
+  {
+    "name": "Lucknow Charbagh",
+    "code": "LKO"
+  },
+  {
+    "name": "Kanpur ",
+    "code": "CNB"
+  },
+  {
+    "name": "Agra",
+    "code": "AGC"
+  },
+  {
+    "name": "Agra Fort",
+    "code": "AF"
+  },
+  {
+    "name": "Mathura",
+    "code": "MTJ"
+  },
+  {
+    "name": "Varanasi ",
+    "code": "BSB"
+  },
+  {
+    "name": "Prayagraj ",
+    "code": "PRYJ"
+  },
+  {
+    "name": "Ayodhya Dham",
+    "code": "AY"
+  },
+  {
+    "name": "Ayodhya",
+    "code": "AYC"
+  },
+  {
+    "name": "Gorakhpur ",
+    "code": "GKP"
+  },
+  {
+    "name": "Bareilly",
+    "code": "BE"
+  },
+  {
+    "name": "Meerut ",
+    "code": "MTC"
+  },
+  {
+    "name": "Jhansi",
+    "code": "VGLJ"
+  },
+  {
+    "name": "Aligarh",
+    "code": "ALJN"
+  },
+  {
+    "name": "Moradabad",
+    "code": "MB"
+  },
+  {
+    "name": "Saharanpur",
+    "code": "SRE"
+  },
+  {
+    "name": "Farrukhabad",
+    "code": "FBD"
+  },
+  {
+    "name": "Gonda",
+    "code": "GD"
+  },
+  {
+    "name": "Mirzapur",
+    "code": "MZP"
+  },
+  {
+    "name": "Vindhyachal",
+    "code": "BDL"
+  },
+  {
+    "name": "Fatehpur",
+    "code": "FTP"
+  },
+  {
+    "name": "Etawah",
+    "code": "ETW"
+  },
+  {
+    "name": "Noida",
+    "code": "CNB"
+  },
+  {
+    "name": "Haridwar ",
+    "code": "HW"
+  },
+  {
+    "name": "Dehradun",
+    "code": "DDN"
+  },
+  {
+    "name": "Rishikesh",
+    "code": "RKSH"
+  },
+  {
+    "name": "Delhi",
+    "code": "NDLS"
+  },
+  {
+    "name": "Rishikesh",
+    "code": "RKSH"
+  },
+  {
+    "name": "Kathgodam",
+    "code": "KGM"
+  },
+  {
+    "name": "Haldwani",
+    "code": "HDW"
+  },
+  {
+    "name": "Roorkee",
+    "code": "RK"
+  },
+  {
+    "name": "Yog Nagari Rishikesh",
+    "code": "YNRK"
+  },
+  {
+    "name": "Ahmedabad ",
+    "code": "ADI"
+  },
+  {
+    "name": "Vadodara ",
+    "code": "BRC"
+  },
+  {
+    "name": "Surat",
+    "code": "ST"
+  },
+  {
+    "name": "Rajkot ",
+    "code": "RJT"
+  },
+  {
+    "name": "Gandhinagar Capital",
+    "code": "GNC"
+  },
+  {
+    "name": "Bhuj",
+    "code": "BHUJ"
+  },
+  {
+    "name": "Dwarka",
+    "code": "DWK"
+  },
+  {
+    "name": "Veraval",
+    "code": "VRL"
+  },
+  {
+    "name": "Somnath",
+    "code": "VRL"
+  },
+  {
+    "name": "Junagadh ",
+    "code": "JND"
+  },
+  {
+    "name": "Porbandar",
+    "code": "PBR"
+  },
+  {
+    "name": "Bhavnagar Terminus",
+    "code": "BVC"
+  },
+  {
+    "name": "Anand",
+    "code": "ANND"
+  },
+  {
+    "name": "Nadiad",
+    "code": "ND"
+  },
+  {
+    "name": "Vapi",
+    "code": "VAPI"
+  },
+  {
+    "name": "Valsad",
+    "code": "BL"
+  },
+  {
+    "name": "Bharuch",
+    "code": "BH"
+  },
+  {
+    "name": "Jamnagar",
+    "code": "JAM"
+  },
+  {
+    "name": "Mehsana",
+    "code": "MSH"
+  },
+  {
+    "name": "Palanpur",
+    "code": "PNU"
+  },
+  {
+    "name": "Chhatrapati Shivaji Maharaj Terminus",
+    "code": "CSMT"
+  },
+  {
+    "name": "Mumbai ",
+    "code": "MMCT"
+  },
+  {
+    "name": "Bandra Terminus",
+    "code": "BDTS"
+  },
+  {
+    "name": "Lokmanya Tilak Terminus",
+    "code": "LTT"
+  },
+  {
+    "name": "Thane",
+    "code": "TNA"
+  },
+  {
+    "name": "Dadar",
+    "code": "DR"
+  },
+  {
+    "name": "Borivali",
+    "code": "BVI"
+  },
+  {
+    "name": "Pune ",
+    "code": "PUNE"
+  },
+  {
+    "name": "Nagpur",
+    "code": "NGP"
+  },
+  {
+    "name": "Nashik Road",
+    "code": "NK"
+  },
+  {
+    "name": "Chhatrapati Sambhajinagar",
+    "code": "AWB"
+  },
+  {
+    "name": "Kolhapur",
+    "code": "KOP"
+  },
+  {
+    "name": "Solapur",
+    "code": "SUR"
+  },
+  {
+    "name": "Shirdi",
+    "code": "SNSI"
+  },
+  {
+    "name": "Manmad",
+    "code": "MMR"
+  },
+  {
+    "name": "Lonavala",
+    "code": "LNL"
+  },
+  {
+    "name": "Khandala",
+    "code": "KAD"
+  },
+  {
+    "name": "Ratnagiri",
+    "code": "RN"
+  },
+  {
+    "name": "Panvel",
+    "code": "PNVL"
+  },
+  {
+    "name": "Amravati",
+    "code": "AMI"
+  },
+  {
+    "name": "Akola",
+    "code": "AK"
+  },
+  {
+    "name": "Nanded",
+    "code": "NED"
+  },
+  {
+    "name": "Jalgaon",
+    "code": "JL"
+  },
+  {
+    "name": "Wardha",
+    "code": "WR"
+  },
+  {
+    "name": "Satara",
+    "code": "STR"
+  },
+  {
+    "name": "Karad",
+    "code": "KRD"
+  },
+  {
+    "name": "Madgaon ",
+    "code": "MAO"
+  },
+  {
+    "name": "Vasco da Gama",
+    "code": "VSG"
+  },
+  {
+    "name": "Thivim",
+    "code": "THVM"
+  },
+  {
+    "name": "Karmali",
+    "code": "KRMI"
+  },
+  {
+    "name": "Kudal",
+    "code": "KUDL"
+  },
+  {
+    "name": "KSR Bengaluru ",
+    "code": "SBC"
+  },
+  {
+    "name": "Bengaluru ",
+    "code": "BNC"
+  },
+  {
+    "name": "Mysuru ",
+    "code": "MYS"
+  },
+  {
+    "name": "Hubballi ",
+    "code": "UBL"
+  },
+  {
+    "name": "Mangaluru ",
+    "code": "MAQ"
+  },
+  {
+    "name": "Mangaluru ",
+    "code": "MAJN"
+  },
+  {
+    "name": "Belagavi",
+    "code": "BGM"
+  },
+  {
+    "name": "Ballari",
+    "code": "BALLARI"
+  },
+  {
+    "name": "Shivamogga",
+    "code": "SME"
+  },
+  {
+    "name": "Hassan",
+    "code": "HAS"
+  },
+  {
+    "name": "Tumakuru",
+    "code": "TMR"
+  },
+  {
+    "name": "Davangere",
+    "code": "DVG"
+  },
+  {
+    "name": "Hosapete",
+    "code": "HPT"
+  },
+  {
+    "name": "Gadag",
+    "code": "GDG"
+  },
+  {
+    "name": "Kalaburagi",
+    "code": "KLBG"
+  },
+  {
+    "name": "Udupi",
+    "code": "UD"
+  },
+  {
+    "name": "Karwar",
+    "code": "KAWR"
+  },
+  {
+    "name": "Gokarna Road",
+    "code": "GOK"
+  },
+  {
+    "name": "Ernakulam ",
+    "code": "ERS"
+  },
+  {
+    "name": "Ernakulam Town",
+    "code": "ERN"
+  },
+  {
+    "name": "Thiruvananthapuram ",
+    "code": "TVC"
+  },
+  {
+    "name": "Kozhikode",
+    "code": "CLT"
+  },
+  {
+    "name": "Thrissur",
+    "code": "TCR"
+  },
+  {
+    "name": "Kollam ",
+    "code": "QLN"
+  },
+  {
+    "name": "Alappuzha",
+    "code": "ALLP"
+  },
+  {
+    "name": "Kottayam",
+    "code": "KTYM"
+  },
+  {
+    "name": "Kannur",
+    "code": "CAN"
+  },
+  {
+    "name": "Shoranur ",
+    "code": "SRR"
+  },
+  {
+    "name": "Palakkad ",
+    "code": "PGT"
+  },
+  {
+    "name": "Kasaragod",
+    "code": "KGQ"
+  },
+  {
+    "name": "Varkala Sivagiri",
+    "code": "VAK"
+  },
+  {
+    "name": "Changanasseri",
+    "code": "CGY"
+  },
+  {
+    "name": "Guruvayur",
+    "code": "GUV"
+  },
+  {
+    "name": "Chennai ",
+    "code": "MAS"
+  },
+  {
+    "name": "Chennai Egmore",
+    "code": "MS"
+  },
+  {
+    "name": "Coimbatore ",
+    "code": "CBE"
+  },
+  {
+    "name": "Madurai ",
+    "code": "MDU"
+  },
+  {
+    "name": "Tiruchirappalli ",
+    "code": "TPJ"
+  },
+  {
+    "name": "Salem ",
+    "code": "SA"
+  },
+  {
+    "name": "Tirunelveli ",
+    "code": "TEN"
+  },
+  {
+    "name": "Rameswaram",
+    "code": "RMM"
+  },
+  {
+    "name": "Kanyakumari",
+    "code": "CAPE"
+  },
+  {
+    "name": "Katpadi ",
+    "code": "KPD"
+  },
+  {
+    "name": "Erode ",
+    "code": "ED"
+  },
+  {
+    "name": "Tiruppur",
+    "code": "TUP"
+  },
+  {
+    "name": "Vellore",
+    "code": "VLR"
+  },
+  {
+    "name": "Thoothukudi",
+    "code": "TN"
+  },
+  {
+    "name": "Dindigul",
+    "code": "DG"
+  },
+  {
+    "name": "Thanjavur",
+    "code": "TJ"
+  },
+  {
+    "name": "Kumbakonam",
+    "code": "KMU"
+  },
+  {
+    "name": "Nagercoil ",
+    "code": "NCJ"
+  },
+  {
+    "name": "Chengalpattu",
+    "code": "CGL"
+  },
+  {
+    "name": "Villupuram",
+    "code": "VM"
+  },
+  {
+    "name": "Pondicherry",
+    "code": "PDY"
+  },
+  {
+    "name": "Hyderabad Deccan",
+    "code": "HYB"
+  },
+  {
+    "name": "Secunderabad ",
+    "code": "SC"
+  },
+  {
+    "name": "Kacheguda",
+    "code": "KCG"
+  },
+  {
+    "name": "Kazipet ",
+    "code": "KZJ"
+  },
+  {
+    "name": "Warangal",
+    "code": "WL"
+  },
+  {
+    "name": "Nizamabad",
+    "code": "NZB"
+  },
+  {
+    "name": "Ramagundam",
+    "code": "RDM"
+  },
+  {
+    "name": "Visakhapatnam",
+    "code": "VSKP"
+  },
+  {
+    "name": "Vijayawada ",
+    "code": "BZA"
+  },
+  {
+    "name": "Tirupati",
+    "code": "TPTY"
+  },
+  {
+    "name": "Nellore",
+    "code": "NLR"
+  },
+  {
+    "name": "Guntur ",
+    "code": "GNT"
+  },
+  {
+    "name": "Rajahmundry",
+    "code": "RJY"
+  },
+  {
+    "name": "Kakinada Town",
+    "code": "CCT"
+  },
+  {
+    "name": "Kakinada Port",
+    "code": "COA"
+  },
+  {
+    "name": "Anantapur",
+    "code": "ATP"
+  },
+  {
+    "name": "Kadapa",
+    "code": "HX"
+  },
+  {
+    "name": "Kurnool ",
+    "code": "KRNT"
+  },
+  {
+    "name": "Srikakulam Road",
+    "code": "CHE"
+  },
+  {
+    "name": "Renigunta",
+    "code": "RU"
+  },
+  {
+    "name": "Bhubaneswar",
+    "code": "BBS"
+  },
+  {
+    "name": "Puri",
+    "code": "PURI"
+  },
+  {
+    "name": "Cuttack",
+    "code": "CTC"
+  },
+  {
+    "name": "Brahmapur",
+    "code": "BAM"
+  },
+  {
+    "name": "Rourkela",
+    "code": "ROU"
+  },
+  {
+    "name": "Sambalpur",
+    "code": "SBP"
+  },
+  {
+    "name": "Balasore",
+    "code": "BLS"
+  },
+  {
+    "name": "Jharsuguda",
+    "code": "JSG"
+  },
+  {
+    "name": "Angul",
+    "code": "ANGL"
+  },
+  {
+    "name": "Baripada",
+    "code": "BPO"
+  },
+  {
+    "name": "Khurda Road",
+    "code": "KUR"
+  },
+  {
+    "name": "Howrah ",
+    "code": "HWH"
+  },
+  {
+    "name": "Sealdah",
+    "code": "SDAH"
+  },
+  {
+    "name": "Kolkata",
+    "code": "KOAA"
+  },
+  {
+    "name": "Santragachi",
+    "code": "SRC"
+  },
+  {
+    "name": "New Jalpaiguri",
+    "code": "NJP"
+  },
+  {
+    "name": "Darjeeling",
+    "code": "DJ"
+  },
+  {
+    "name": "Siliguri ",
+    "code": "SGUJ"
+  },
+  {
+    "name": "Durgapur",
+    "code": "DGR"
+  },
+  {
+    "name": "Asansol ",
+    "code": "ASN"
+  },
+  {
+    "name": "Malda Town",
+    "code": "MLDT"
+  },
+  {
+    "name": "Kharagpur",
+    "code": "KGP"
+  },
+  {
+    "name": "Barddhaman",
+    "code": "BWN"
+  },
+  {
+    "name": "Haldia",
+    "code": "HLZ"
+  },
+  {
+    "name": "Patna ",
+    "code": "PNBE"
+  },
+  {
+    "name": "Gaya ",
+    "code": "GAYA"
+  },
+  {
+    "name": "Muzaffarpur ",
+    "code": "MFP"
+  },
+  {
+    "name": "Bhagalpur",
+    "code": "BGP"
+  },
+  {
+    "name": "Darbhanga",
+    "code": "DBG"
+  },
+  {
+    "name": "Purnia ",
+    "code": "PRNA"
+  },
+  {
+    "name": "Ara ",
+    "code": "ARA"
+  },
+  {
+    "name": "Rajgir",
+    "code": "RGD"
+  },
+  {
+    "name": "Bodh Gaya",
+    "code": "GAYA"
+  },
+  {
+    "name": "Ranchi",
+    "code": "RNC"
+  },
+  {
+    "name": "Tatanagar ",
+    "code": "TATA"
+  },
+  {
+    "name": "Dhanbad ",
+    "code": "DHN"
+  },
+  {
+    "name": "Bokaro Steel ",
+    "code": "BKSC"
+  },
+  {
+    "name": "Deoghar",
+    "code": "DGHR"
+  },
+  {
+    "name": "Jasidih ",
+    "code": "JSME"
+  },
+  {
+    "name": "Hazaribagh",
+    "code": "HZD"
+  },
+  {
+    "name": "Bhopal ",
+    "code": "BPL"
+  },
+  {
+    "name": "Indore ",
+    "code": "INDB"
+  },
+  {
+    "name": "Gwalior",
+    "code": "GWL"
+  },
+  {
+    "name": "Jabalpur",
+    "code": "JBP"
+  },
+  {
+    "name": "Ujjain ",
+    "code": "UJN"
+  },
+  {
+    "name": "Khajuraho",
+    "code": "KURJ"
+  },
+  {
+    "name": "Sanchi",
+    "code": "SAG"
+  },
+  {
+    "name": "Satna",
+    "code": "STA"
+  },
+  {
+    "name": "Ratlam",
+    "code": "RTM"
+  },
+  {
+    "name": "Rewa",
+    "code": "REWA"
+  },
+  {
+    "name": "Katni",
+    "code": "KTE"
+  },
+  {
+    "name": "Pachmarhi",
+    "code": "PACH"
+  },
+  {
+    "name": "Omkareshwar",
+    "code": "OM"
+  },
+  {
+    "name": "Raipur ",
+    "code": "R"
+  },
+  {
+    "name": "Bilaspur ",
+    "code": "BSP"
+  },
+  {
+    "name": "Durg ",
+    "code": "DURG"
+  },
+  {
+    "name": "Korba",
+    "code": "KRBA"
+  },
+  {
+    "name": "Jagdalpur",
+    "code": "JDB"
+  },
+  {
+    "name": "Guwahati",
+    "code": "GHY"
+  },
+  {
+    "name": "Kamakhya",
+    "code": "KYQ"
+  },
+  {
+    "name": "Dibrugarh",
+    "code": "DBRG"
+  },
+  {
+    "name": "Silchar",
+    "code": "SCL"
+  },
+  {
+    "name": "New Bongaigaon",
+    "code": "NBQ"
+  },
+  {
+    "name": "Jorhat Town",
+    "code": "JTTN"
+  },
+  {
+    "name": "Tinsukia",
+    "code": "NTSK"
+  },
+  {
+    "name": "Mariani",
+    "code": "MXN"
+  },
+  {
+    "name": "Dimapur",
+    "code": "DMV"
+  },
+  {
+    "name": "Agartala",
+    "code": "AGTL"
+  },
+  {
+    "name": "Kumarghat",
+    "code": "KUGT"
+  },
+  {
+    "name": "Madgaon",
+    "code": "MAO"
+  },
+  {
+    "name": "Sawantwadi Road",
+    "code": "SWV"
+  },
+  {
+    "name": "Chiplun",
+    "code": "CHI"
+  },
+  {
+    "name": "Kankavli",
+    "code": "KKW"
+  },
+  {
+    "name": "Haridwar",
+    "code": "HW"
+  },
+  {
+    "name": "Varanasi",
+    "code": "BSB"
+  },
+  {
+    "name": "Ayodhya",
+    "code": "AY"
+  },
+  {
+    "name": "Mathura",
+    "code": "MTJ"
+  },
+  {
+    "name": "Vrindavan",
+    "code": "MRT"
+  },
+  {
+    "name": "Amritsar",
+    "code": "ASR"
+  },
+  {
+    "name": "Ajmer",
+    "code": "AII"
+  },
+  {
+    "name": "Konark",
+    "code": "PURI"
+  },
+  {
+    "name": "Ujjain",
+    "code": "UJN"
+  },
+  {
+    "name": "Vaishno Devi",
+    "code": "SVDK"
+  },
+  {
+    "name": "Katra",
+    "code": "SVDK"
+  }
+]

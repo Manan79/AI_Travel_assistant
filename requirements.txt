@@ -10,4 +10,8 @@ requests
 aviationstack-mcp==1.6.0
 langchain-openrouter
 langchain-google-genai
+<<<<<<< HEAD
+langgraph-cli[inmem]
+=======
 langsmith
+>>>>>>> main
