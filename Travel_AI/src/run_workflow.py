@@ -24,22 +24,12 @@ def build_workflow():
     graph.add_edge(START, "Query Processor")
     graph.add_edge("Query Processor", "Brain Agent")
 
-<<<<<<< HEAD
     graph.add_conditional_edges(
         "Brain Agent",
         tools_condition,
         {
             "tools": "tools",
             "__end__": "Iternary_agent",
-=======
-
-async def workflow_invoke():
-    
-    workflow = build_workflow()
-    config = {"configurable": {"thread_id": "3"}}
-    result = await workflow.ainvoke({
-            "user_query": "Hi I planning a trip of USA from India alone for 7 days",
->>>>>>> main
         },
     )
 
@@ -48,6 +38,7 @@ async def workflow_invoke():
 
     checkpointer = InMemorySaver()
     return graph.compile(checkpointer=checkpointer)
+
 
 @traceable
 async def workflow_invoke():
@@ -59,16 +50,14 @@ async def workflow_invoke():
         "messages": [],
     }
 
-    # result = await workflow.ainvoke(initial_state, config=config)
-    # print(result.get('itinerary', ''))
-
     async for chunk in workflow.astream(
         initial_state,
         config=config,
         stream_mode="messages",
     ):
-       message, metadata = chunk
-       print(message.content, end="", flush=True)
+        message, metadata = chunk
+        print(message.content, end="", flush=True)
+
 
 if __name__ == "__main__":
     asyncio.run(workflow_invoke())

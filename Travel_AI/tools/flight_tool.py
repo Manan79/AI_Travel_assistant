@@ -1,19 +1,13 @@
-<<<<<<< HEAD
 import re
 from datetime import datetime
 
 from langchain_core.tools import tool
-=======
-from langchain_core.tools import tool
-
->>>>>>> main
 from .mcp_client import client
 
 # ==========================================
 # AviationStack MCP tools
 # ==========================================
 
-<<<<<<< HEAD
 aviation_tools = {}
 
 
@@ -25,48 +19,30 @@ async def initialize_aviation_tools():
 
     # Load only AviationStack.
     # Tavily and Weather will not be initialized here.
-    tools = await client.get_tools(
-        server_name="Aviationstack_MCP"
-    )
+    tools = await client.get_tools(server_name="Aviationstack_MCP")
 
-    aviation_tools = {
-        tool.name: tool
-        for tool in tools
-    }
+    aviation_tools = {tool.name: tool for tool in tools}
 
     if not aviation_tools:
-        raise RuntimeError(
-            "AviationStack MCP connected but "
-            "returned no tools."
-        )
+        raise RuntimeError("AviationStack MCP connected but returned no tools.")
 
 
-async def aviation_mcp_call(
-    tool_name: str,
-    tool_args: dict = None
-):
+async def aviation_mcp_call(tool_name: str, tool_args: dict = None):
     await initialize_aviation_tools()
 
-    tool = aviation_tools.get(tool_name)
+    tool_obj = aviation_tools.get(tool_name)
 
-    if tool is None:
-        available_tools = ", ".join(
-            sorted(aviation_tools.keys())
-        )
-
+    if tool_obj is None:
+        available_tools = ", ".join(sorted(aviation_tools.keys()))
         raise ValueError(
-            f"AviationStack tool '{tool_name}' "
-            "was not found. "
-            f"Available tools: "
-            f"{available_tools or 'none'}"
+            f"AviationStack tool '{tool_name}' was not found. "
+            f"Available tools: {available_tools or 'none'}"
         )
 
-    result = await tool.ainvoke(
-        tool_args or {}
-    )
-
+    result = await tool_obj.ainvoke(tool_args or {})
     return result
-=======
+
+
 @tool
 async def search_flights(
     departure_airport: str,
@@ -81,18 +57,19 @@ async def search_flights(
     if limit < 1:
         raise ValueError("limit must be at least 1")
 
-    aviation_tools = await client.get_tools(server_name="Aviationstack_MCP")
-    route_tool = next(
-        (tool for tool in aviation_tools if tool.name == "list_routes"),
-        None,
-    )
->>>>>>> main
+    await initialize_aviation_tools()
+    route_tool = aviation_tools.get("list_routes")
 
     if route_tool is None:
         raise RuntimeError("Aviationstack MCP does not provide the list_routes tool")
 
-<<<<<<< HEAD
-
+    return await route_tool.ainvoke(
+        {
+            "dep_iata": departure_airport.strip().upper(),
+            "arr_iata": arrival_airport.strip().upper(),
+            "limit": limit,
+        }
+    )
 
 
 @tool
@@ -105,12 +82,3 @@ async def list_airports():
 async def list_airlines():
     """Call This tool to get list of airplines"""
     return await aviation_mcp_call("list_airlines")
-=======
-    return await route_tool.ainvoke(
-        {
-            "dep_iata": departure_airport.strip().upper(),
-            "arr_iata": arrival_airport.strip().upper(),
-            "limit": limit,
-        }
-    )
->>>>>>> main

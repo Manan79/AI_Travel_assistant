@@ -1,13 +1,9 @@
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-
 load_dotenv()
 
-<<<<<<< HEAD
 MODEL = ChatGoogleGenerativeAI(model='gemini-3.5-flash-lite')
-=======
-MODEL = ChatGoogleGenerativeAI(model = 'gemini-3.5-flash-lite')
 
 PROMPT = """
 You are the Itinerary Generator Agent for a Travel AI system.
@@ -64,7 +60,7 @@ Never use placeholders such as [Not provided], [Unknown], N/A, or TBD. Use null/
 Do not explain your reasoning or mention agents, tools, prompts, or system state.
 
 Return ONLY the structured itinerary according to the provided output schema.
->>>>>>> main
+"""
 
 
 async def iternary_generator(state):

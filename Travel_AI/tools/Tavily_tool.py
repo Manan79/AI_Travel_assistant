@@ -6,7 +6,6 @@ if __package__ in (None, ""):
 from Travel_AI.tools.mcp_client import client
 import asyncio
 
-<<<<<<< HEAD
 @tool
 async def tavily_search(query: str, max_results: int = 5):
     """Search the web for hotels, places, and travel information."""
@@ -14,12 +13,6 @@ async def tavily_search(query: str, max_results: int = 5):
         raise ValueError("query must not be empty")
     if max_results < 1:
         raise ValueError("max_results must be at least 1")
-=======
-async def tavily_search():
-    """ Search tool used to seach information accross the web  """
-
-    tools = await client.get_tools()
->>>>>>> main
 
     tools = await client.get_tools(server_name="Tavily_MCP")
     search_tool = next(
@@ -38,8 +31,8 @@ async def tavily_search():
     results_list = response[0].get("result", []) if response else []
 
     for i, r in enumerate(results_list, 1):
-        title   = r.get("title", "Unknown")
-        url     = r.get("url", "")
+        title = r.get("title", "Unknown")
+        url = r.get("url", "")
         snippet = r.get("content", "").strip()
         # Keep only the first 300 characters to avoid wall-of-text
         if len(snippet) > 300:

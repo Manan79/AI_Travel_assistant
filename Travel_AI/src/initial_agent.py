@@ -23,9 +23,8 @@ class StructuredLLM(BaseModel):
     duration: int = Field(
         description="Duration of the trip in days"
     )
-
     transport: str = Field(
-        description= "Mode of travelling"
+        description="Mode of travelling"
     )
     country: str = Field(
         description="Which country is the user travelling to"
@@ -40,16 +39,13 @@ structured_llm_response = LLM.with_structured_output(
 
 async def processing_query(state):
     prompt = PromptTemplate.from_template("""
-    You are an expert travel assistant, you have to broke the user query into 
+    You are an expert travel assistant, you have to break the user query into
     1. boarding_station
     2. destination_station
     3. number_guest
     4. duration
-<<<<<<< HEAD
-    5. Country
-=======
-    5. Mode of transport 
->>>>>>> main
+    5. mode_of_transport
+    6. country
 
     User_query: {user_query}
 
@@ -58,21 +54,19 @@ async def processing_query(state):
     ##Rule
     1. Remove the suffix if any like: Jalandhar city -> Jalandhar
     2. If the user mention state or country in destination, then you can return str containing (Capital or Famous places)
-        -ex :- Make a plan from New Delhi to Punjab, Retrun :- Amritsar
-        -ex :- Make a plan from New Delhi to Goa, Retrun :- Panaji
+        -ex :- Make a plan from New Delhi to Punjab, Return :- Amritsar
+        -ex :- Make a plan from New Delhi to Goa, Return :- Panaji
         (You can make decision on your own based if there is Ambiguity)
 
-    3. If user donot clearly specify the source then take the capital city of the place
+    3. If user does not clearly specify the source then take the capital city of the place
         - ex:- Make an plan from punjab to Rameshwaram, Source = 'Chandigarh'
-<<<<<<< HEAD
 
-    4. If the boarding_station and destination_station lies in india then set the country to india,
-        otherwise set the country Abroad.
-=======
-    4. If the source and destination is in India, then you can use the railway tool.
->>>>>>> main
-""")
-    message = prompt.format(user_query = state.get('user_query', ''))
+    4. If the boarding_station and destination_station lies in India then set the country to India,
+       otherwise set the country Abroad.
+
+    5. If the source and destination is in India, then you can use the railway tool.
+    """)
+    message = prompt.format(user_query=state.get('user_query', ''))
     response = await structured_llm_response.ainvoke(message)
     print("Intital Agent Responded")
     return response.model_dump()
