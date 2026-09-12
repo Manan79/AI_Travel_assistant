@@ -22,7 +22,6 @@ async def tavily_search(query: str, max_results: int = 5):
 
     if search_tool is None:
         raise RuntimeError("Tavily MCP does not provide the tavily_search tool")
-    print("Tavily Tool has been called")
 
     results = []
     response = await search_tool.ainvoke(

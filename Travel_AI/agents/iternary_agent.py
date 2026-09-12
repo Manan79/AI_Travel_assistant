@@ -1,12 +1,16 @@
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openrouter import ChatOpenRouter
 
 
 load_dotenv()
 
-MODEL = ChatGoogleGenerativeAI(model='gemini-3.5-flash-lite')
+MODEL = ChatOpenRouter(
+    model="qwen/qwen3.7-flash",
+    temperature=0.2,
+    max_tokens=2500,
+)
 
-
+# print(MODEL.invoke("Hi My name is Manan"))
 async def iternary_generator(state):
     brain_agent_response = state.get('brain_agent_response', '')
     user_query = state.get('user_query', '')
@@ -27,12 +31,12 @@ async def iternary_generator(state):
         Day 1:
         - morning and afternoon (timmings):
             - Activitiy
-            - detailed description of the activitiy
+            - detailed description of the activitiy(max 2-3 lines)
             - Any suggestions (optional)
         (include food breaks)
         - Evening (timmings):
             - Activitiy
-            - detailed description of the activitiy
+            - detailed description of the activitiy(max 2-3 lines)
             - Any suggestions (optional)
         ......
 
@@ -40,11 +44,18 @@ async def iternary_generator(state):
 
         OUTPUT FORMAT:
         iternary should look like this
-        1. Hotel Suggestions
-        2. Travel (flight/train) suggestions
-        3. Day by day iternary
-        4. Extra suggestions
-        5. Budget estimation (if you can)
+        ## 1. Hotel Suggestions
+            - Give 2-3 useful hotel options from the research.
+            - Include short reason/details only when available.
+        ## 2. Travel Suggestions
+            - Give the best available flight/train option(s).
+            - Include departure/arrival or other useful details only when provided.
+        ## 3. Day by day iternary
+        ## 4. Extra Suggestions
+        - 3-5 concise practical tips.
+        ## 5. Budget Estimation
+        - Provide an estimate only if the research contains enough information.
+        - Clearly separate known prices from approximate estimate
 
     """
     result = await MODEL.ainvoke(prompt)

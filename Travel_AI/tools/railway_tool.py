@@ -39,47 +39,50 @@ async def get_train_details(
     It accepts the station codes instead of station names.
     for ex Jalandhar city -> JUC
     """
+    try:
 
 
+        bs = boarding_station
+        ds = destination_station
+        # bs = _station_code(boarding_station)
+        # ds = _station_code(destination_station)
+        api_key = os.environ.get("RAILRADAR_API_KEY")
+        if not api_key:
+            raise RuntimeError("RAILRADAR_API_KEY is not configured")
 
-    bs = boarding_station
-    ds = destination_station
-    # bs = _station_code(boarding_station)
-    # ds = _station_code(destination_station)
-    api_key = os.environ.get("RAILRADAR_API_KEY")
-    if not api_key:
-        raise RuntimeError("RAILRADAR_API_KEY is not configured")
+        print(f"Finding Trains between {bs} to {ds}")
 
-    print(f"Finding Trains between {bs} to {ds}")
+        async with httpx.AsyncClient(timeout=30.0) as client:
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(
+                f"https://api.railradar.in/v1/trains/between/"
+                f"{bs}/{ds}",
+                headers={
+                    "Authorization": api_key
+                }
+            )
 
-        response = await client.get(
-            f"https://api.railradar.in/v1/trains/between/"
-            f"{bs}/{ds}",
-            headers={
-                "Authorization": api_key
-            }
-        )
+            response.raise_for_status()
 
-        response.raise_for_status()
+            data = response.json()
 
-        data = response.json()
+            trains = data.get("data", {}).get("trains", [])
+            result = []
 
-        trains = data.get("data", {}).get("trains", [])
-        result = []
+            for train in trains:
+                result.append({
+                "train_number": train["train"]["number"],
+                "train_name": train["train"]["name"],
+                "train_type": train["train"]["type"],
+                "departure": train["from"]["departure"],
+                "arrival": train["to"]["arrival"],
+                "duration": train["duration"],
+                "distance": train["distance"],
+                "running_days": train["train"]["runDays"]
+            })
+            
+            return result
+    except Exception as e:
+        return ("Unable to get the train result because of" , e)
 
-        for train in trains:
-            result.append({
-            "train_number": train["train"]["number"],
-            "train_name": train["train"]["name"],
-            "train_type": train["train"]["type"],
-            "departure": train["from"]["departure"],
-            "arrival": train["to"]["arrival"],
-            "duration": train["duration"],
-            "distance": train["distance"],
-            "running_days": train["train"]["runDays"]
-        })
-        
-        return result
 

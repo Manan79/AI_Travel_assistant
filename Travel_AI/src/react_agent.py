@@ -33,8 +33,6 @@ def get_tools(state):
     if country == 'india':
         selected_tools = [
             tavily_search,
-            list_airlines,
-            list_airports,
             get_train_details,
         ]
     else:
@@ -63,18 +61,16 @@ You are responsible for coordinating the travel-planning process, not for genera
  Search for the hotels in destination place and recommend atmost 5 hotels available. The hotel recommendation should divided in 3 parts
     a. Premium Hotels (High cost and more facilities)
     b. Budget Hotels (Moderate cost and facilities)
-    c. Dharmshala and Guest rooms (Low cost and cheap hotels)
-
 Use Tavily websearch tool to find the hotels for all the categories.
 Remember hotel selection cannot be returned NULL
 
 2. *Place Finder
 
 Recommend and search for places to explore and experience near user destination, The place recommendation should also divided into 3 parts
-    a. High rated places and tourist places in the particular area
+    a. High rated places and tourist places in the particular area.
     b. Famous and tourist places nearby the destination area (ex destination :- Washington DC, then you can also recommends other places like Staue of Liberty, Manhatten etc)
     c. Add places based on user interests for ex:- beaches , religious (only if user specially mention it)
-NOTE :- There should be detailed description (3-5 lines) about the place and why it is famous.
+NOTE :- There should be detailed description (3-4 lines) about the place and why it is famous.
     
 Use Tavily websearch tool to find the places for all the categories.
 Remember Place Finder cannot be returned NUll
@@ -96,6 +92,25 @@ Use Railway tool , flight tool to get the infromation, you can also use tavily s
 1. You cannot return null for the fields starting with *
 2. Use tools when required donot invent infromation
 3. Use Websearch if there is any missing infromation.
+4. In case of tool failure maximum retries per tool is 3.
+
+-- Workflow--
+1. Extract requirements
+2. Decide required tools
+3. Call each required tool ONCE
+4. Collect results
+5. Stop
+6. Send compact results to Itinerary Agent
+
+Note :- Try to keep all the information in complelte,minimal and in raw form ,you are not iternary agent you just need to fetch and pass the infromation
+
+Parallel Tool Rule:
+- When hotels, places, and transport information can be fetched independently,
+  request those tools together in one tool-calling response.
+- Example: hotels + places + train details should be emitted as multiple tool calls
+  in the same response, not as separate reasoning turns.
+- Do not make duplicate searches for the same information unless a previous tool
+  failed or the result is genuinely insufficient.
 
 
 """
@@ -121,5 +136,14 @@ async def react_agent(state):
     ]
 
     response = await bound_llm.ainvoke(messages)
+    tool_calls = getattr(response, "tool_calls", None)
+    if not tool_calls:
+        tool_calls = response.additional_kwargs.get("tool_calls", [])
+
+    if tool_calls:
+        for tc in tool_calls:
+            print("MODEL TOOL DECISION:")
+            print("tool =", tc.get("name") or tc.get("function", {}).get("name"))
+            print("args =", tc.get("args") or tc.get("function", {}).get("arguments"))
     return {"messages": [response] , 
             "brain_agent_response": response.content}

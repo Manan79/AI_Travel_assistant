@@ -22,9 +22,6 @@ class MainWorkflow(TypedDict):
     destination_station: str
     number_guest: int
     duration: int
-    # place_selection: str
-    # hotel_agent_response: str
-    # route_selection: str
     itinerary: str
     messages: Annotated[list, add_messages]
     country: str

@@ -40,31 +40,42 @@ def build_workflow():
     return graph.compile(checkpointer=checkpointer)
 
 @traceable
-async def workflow_invoke():
+async def workflow_invoke(user_query: str, thread_id: str):
     workflow = build_workflow()
-    config = {"configurable": {"thread_id": "10"}}
+    initial_state = {"user_query": user_query, "messages": []}
 
-    initial_state = {
-        "user_query": "Hi, plan a trip from Mumbai to Australia for 5 days for 2 person starting",
-        "messages": [],
+    graph_config = {
+        "configurable": {
+            "thread_id": thread_id
+        }
     }
 
-    # result = await workflow.ainvoke(initial_state, config=config)
-    # print(result.get('itinerary', ''))
+    result = await workflow.ainvoke(initial_state, config=graph_config)
+    return result
 
-    async for chunk in workflow.astream(
-        initial_state,
-        config=config,
-        stream_mode="messages",
-    ):
-       message, metadata = chunk
-       print(message.content, end="", flush=True)
+# if __name__ == "__main__":
+#     asyncio.run(workflow_invoke(user_query = "Hi Plan a solo trip for 5 days from New Delhi to Mumbai",
+#     thread_id = "45"
+#     ))
 
-if __name__ == "__main__":
-    asyncio.run(workflow_invoke())
-    # graph = graph.compile()
-    # graph_image = graph.get_graph().draw_mermaid_png()
-
-    # with open("travel_ai_graph.png", "wb") as f:
-    #     f.write(graph_image)
-
+# ====== Enable Streaming ========
+# async def workflow_invoke(user_query: str , config: str):
+#     workflow = build_workflow()
+   
+#     initial_state = {
+#         "user_query": user_query,
+#         "messages": [],
+#     }
+#     # async for chunk in workflow.astream(
+#     #     initial_state,
+#     #     config=config,
+#     #     stream_mode="messages",
+#     # ):
+#     #    message, metadata = chunk
+#     #    print (message.content, end="", flush=True)
+#     configs = {
+#         "configurable": {
+#             "thread_id": config
+#         }
+#     }
+    # result = await workflow.ainvoke(initial_state, config=configs)
