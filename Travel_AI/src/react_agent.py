@@ -25,7 +25,11 @@ all_tools = [
 
 
 def get_tools(state):
-    """Return an LLM object bound to the right country-aware tool set."""
+    """Return an LLM object bound to the right country-aware tool set.
+
+    The tool model is asked to emit all independent tool calls in one
+    LLM response, and the same request should not be sent again.
+    """
     llm = ChatOpenRouter(model='gpt-4o-mini')
 
     country = str(state.get('country', '')).strip().casefold() if isinstance(state, dict) else ''
@@ -42,7 +46,8 @@ def get_tools(state):
             list_airlines,
         ]
 
-    return llm.bind_tools(selected_tools)
+    # Enable parallel tool calling for independent hotel/place/transport searches.
+    return llm.bind_tools(selected_tools, parallel_tool_calls=True)
 
 
 PROMPT = """
@@ -93,6 +98,7 @@ Use Railway tool , flight tool to get the infromation, you can also use tavily s
 2. Use tools when required donot invent infromation
 3. Use Websearch if there is any missing infromation.
 4. In case of tool failure maximum retries per tool is 3.
+5. If station is not available or station tool is returning station not available then go for nearby station which is available.
 
 -- Workflow--
 1. Extract requirements
@@ -111,6 +117,9 @@ Parallel Tool Rule:
   in the same response, not as separate reasoning turns.
 - Do not make duplicate searches for the same information unless a previous tool
   failed or the result is genuinely insufficient.
+- You must emit all independent tool calls in one response turn.
+- If a tool call has already been made with the same arguments for this request,
+  do not emit the duplicate again.
 
 
 """
@@ -129,10 +138,12 @@ async def react_agent(state):
         f"destination_station: {state.get('destination_station', 'Not provided')}",
     ])
 
+    # Keep only compact instructions for the planner. Do not replay all
+    # previous messages into the model again, otherwise the same tool
+    # arguments are seen repeatedly and the graph grows the prompt.
     messages = [
         SystemMessage(content=PROMPT),
         HumanMessage(content=user_input),
-        *state.get("messages", []),
     ]
 
     response = await bound_llm.ainvoke(messages)
@@ -145,5 +156,5 @@ async def react_agent(state):
             print("MODEL TOOL DECISION:")
             print("tool =", tc.get("name") or tc.get("function", {}).get("name"))
             print("args =", tc.get("args") or tc.get("function", {}).get("arguments"))
-    return {"messages": [response] , 
+    return {"messages": [response],
             "brain_agent_response": response.content}

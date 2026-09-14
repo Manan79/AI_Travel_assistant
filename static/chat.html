@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripMate AI Planner - Chat</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="travel-app">
+    <aside class="sidebar">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" class="icon">
+            <path d="M3 11l18-8-4 18-5-5-5 5z"></path>
+          </svg>
+        </div>
+        <span class="logo-text">TripMate AI</span>
+      </div>
+
+      <div class="sidebar-title">Travel System</div>
+
+      <nav class="nav-list">
+        <a class="nav-item" href="/">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M4 17l5-5 4 4 5-9 4 4"></path>
+            </svg>
+          </span>
+          <span>Plan Trip</span>
+        </a>
+        <a class="nav-item active" href="/chat">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M3 11a9 9 0 0 1 9-9 9 9 0 0 1 9 9 9 9 0 0 1-9 9"></path>
+              <path d="M7 13a4 4 0 0 0 8 0"></path>
+            </svg>
+          </span>
+          <span>Chatbot</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-profile">
+          <span class="profile-avatar">TS</span>
+          <div>
+            <span class="profile-name">Taylor Smith</span>
+            <span class="profile-meta">Travel Planner</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-left">
+          <span class="page-kicker">Travel AI</span>
+          <span class="page-path">/ Chatbot</span>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-button" id="themeToggle">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M12 3v2"></path>
+              <path d="M12 19v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M3 12h2"></path>
+              <path d="M19 12h2"></path>
+              <path d="m4.93 19.07 1.41-1.41"></path>
+              <path d="m17.66 6.34 1.41-1.41"></path>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+          </button>
+          <a class="new-plan-button" href="/">+ New plan</a>
+        </div>
+      </section>
+
+      <section class="chatbot-page">
+        <section class="chat-panel chatbot-panel">
+          <section class="chat-header">
+            <div class="chat-header-left">
+              <span class="chat-avatar">
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path d="M3 11a9 9 0 0 1 9-9 9 9 0 0 1 9 9 9 9 0 0 1-9 9"></path>
+                  <path d="M7 13a4 4 0 0 0 8 0"></path>
+                </svg>
+              </span>
+              <div>
+                <span class="chat-label">TripMate AI</span>
+                <span class="chat-status">Online</span>
+              </div>
+            </div>
+            <div class="chat-actions">
+              <button class="icon-button chat-icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path d="M5 4h8v8H5z"></path>
+                  <path d="M11 12h8v8h-8z"></path>
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <section class="chat-stream" id="chatStream">
+            <div class="chat-row bot-row">
+              <div class="message-avatar">AI</div>
+              <div class="chat-bubble">
+                <div class="chat-bubble-title">Trip planner</div>
+                <p>Hello! Tell me where you want to go and I’ll plan a route, hotel idea, and itinerary for you.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="chat-input-wrap">
+            <div class="chat-input-row">
+              <button class="icon-button small-icon">
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path d="M4 12a8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8 8 8 0 0 1-8-8z"></path>
+                  <path d="M8 12h8"></path>
+                </svg>
+              </button>
+              <textarea class="chat-input-placeholder" id="chatInput" rows="2" placeholder="Ask for hotels, places, transport..."></textarea>
+              <button class="send-button" id="sendButton">
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path d="M3 12l18-9-5 18  -? "></path>
+                </svg>
+              </button>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+</body>
+</html>

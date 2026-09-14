@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TripMate AI Planner</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="travel-app">
+    <aside class="sidebar">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" class="icon">
+            <path d="M3 11l18-8-4 18-5-5-5 5z"></path>
+          </svg>
+        </div>
+        <span class="logo-text">TripMate AI</span>
+      </div>
+
+      <div class="sidebar-title">Travel System</div>
+
+      <nav class="nav-list">
+        <a class="nav-item active" href="/">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M4 17l5-5 4 4 5-9 4 4"></path>
+            </svg>
+          </span>
+          <span>Plan Trip</span>
+        </a>
+        <a class="nav-item" href="/chat">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M3 11a9 9 0 0 1 9-9 9 9 0 0 1 9 9 9 9 0 0 1-9 9"></path>
+              <path d="M7 13a4 4 0 0 0 8 0"></path>
+            </svg>
+          </span>
+          <span>Chatbot</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-profile">
+          <span class="profile-avatar">TS</span>
+          <div>
+            <span class="profile-name">Taylor Smith</span>
+            <span class="profile-meta">Travel Planner</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="topbar-left">
+          <span class="page-kicker">Travel AI</span>
+          <span class="page-path">/ Planner</span>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-button" id="themeToggle">
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M12 3v2"></path>
+              <path d="M12 19v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M3 12h2"></path>
+              <path d="M19 12h2"></path>
+              <path d="m4.93 19.07 1.41-1.41"></path>
+              <path d="m17.66 6.34 1.41-1.41"></path>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+          </button>
+          <a class="new-plan-button" href="/chat">+ Chatbot</a>
+        </div>
+      </section>
+
+      <section class="planner-layout">
+        <section class="left-column">
+          <section class="planner-panel">
+            <section class="planner-head">
+              <div>
+                <span class="section-tag">Trip Intelligence</span>
+                <h1>Plan a trip</h1>
+              </div>
+              <button class="sample-button" id="samplePrompt">
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path d="M5 12h14"></path>
+                  <path d="M13 3l9 9-9 9"></path>
+                </svg>
+                Sample
+              </button>
+            </section>
+
+            <section class="trip-form-card">
+              <form id="tripForm">
+                <div class="field-group">
+                  <label for="message">Trip request</label>
+                  <textarea id="message" name="message" rows="5" required placeholder="Plan a 5-day holiday from New Delhi to Goa for two travelers..."></textarea>
+                </div>
+
+                <div class="two-columns">
+                  <div class="field-group">
+                    <label for="origin">From</label>
+                    <input type="text" id="origin" value="New Delhi" />
+                  </div>
+                  <div class="field-group">
+                    <label for="destination">To</label>
+                    <input type="text" id="destination" value="Goa" />
+                  </div>
+                </div>
+
+                <div class="two-columns">
+                  <div class="field-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration">
+                      <option selected>5 days</option>
+                      <option>3 days</option>
+                      <option>7 days</option>
+                      <option>10 days</option>
+                    </select>
+                  </div>
+                  <div class="field-group">
+                    <label for="travelers">Travelers</label>
+                    <select id="travelers">
+                      <option selected>2 travelers</option>
+                      <option>1 traveler</option>
+                      <option>3 travelers</option>
+                      <option>Family</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="two-columns">
+                  <div class="field-group">
+                    <label for="style">Style</label>
+                    <select id="style">
+                      <option selected>Nature & Heritage</option>
+                      <option>Food & Culture</option>
+                      <option>Adventure</option>
+                      <option>Relaxation</option>
+                    </select>
+                  </div>
+                  <div class="field-group">
+                    <label for="budget">Budget</label>
+                    <select id="budget">
+                      <option selected>Mid-range</option>
+                      <option>Luxury</option>
+                      <option>Budget</option>
+                      <option>Premium</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="button" class="secondary-button" id="surpriseButton">Surprise me</button>
+                  <button type="submit" class="primary-button">
+                    <span class="button-icon">
+                      <svg viewBox="0 0 24 24" class="icon">
+                        <path d="M5 12h14"></path>
+                        <path d="M13 3l9 9-9 9"></path>
+                      </svg>
+                    </span>
+                    Generate
+                  </button>
+                </div>
+
+                <div class="error-box" id="errorBox"></div>
+              </form>
+            </section>
+          </section>
+
+          <section class="itinerary-output-panel">
+            <div class="itinerary-output-head">
+              <span class="section-tag">Full Itinerary</span>
+              <span class="itinerary-status">Ready</span>
+            </div>
+            <div class="itinerary-output" id="itineraryOutput">
+              <div class="empty-output">Your itinerary will appear here.</div>
+            </div>
+          </section>
+        </section>
+
+        <section class="day-panel">
+          <section class="day-panel-head">
+            <span class="section-tag">Day by day</span>
+            <span class="day-panel-title">Itinerary Route</span>
+          </section>
+          <section class="day-list" id="dayList">
+            <article class="day-item">
+              <span class="day-marker">Day 1</span>
+              <div class="day-card-body">
+                <span class="day-route">Arrival</span>
+                <span class="day-place">New Delhi → Goa</span>
+              </div>
+            </article>
+            <article class="day-item">
+              <span class="day-marker">Day 2</span>
+              <div class="day-card-body">
+                <span class="day-route">Explore</span>
+                <span class="day-place">Nature & Heritage</span>
+              </div>
+            </article>
+            <article class="day-item">
+              <span class="day-marker">Day 3</span>
+              <div class="day-card-body">
+                <span class="day-route">Culture</span>
+                <span class="day-place">Local food</span>
+              </div>
+            </article>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+</html>

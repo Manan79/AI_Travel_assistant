@@ -6,6 +6,30 @@ if __package__ in (None, ""):
 from Travel_AI.tools.mcp_client import client
 import asyncio
 
+# Cache Tavily MCP tool discovery once per process so we do not reload
+# the remote MCP server registry for every search request.
+TAVILY_SEARCH_TOOL = None
+
+
+async def _get_tavily_search_tool():
+    global TAVILY_SEARCH_TOOL
+
+    if TAVILY_SEARCH_TOOL is not None:
+        return TAVILY_SEARCH_TOOL
+
+    tools = await client.get_tools(server_name="Tavily_MCP")
+    search_tool = next(
+        (tool_obj for tool_obj in tools if tool_obj.name == "tavily_search"),
+        None,
+    )
+
+    if search_tool is None:
+        raise RuntimeError("Tavily MCP does not provide the tavily_search tool")
+
+    TAVILY_SEARCH_TOOL = search_tool
+    return search_tool
+
+
 @tool
 async def tavily_search(query: str, max_results: int = 5):
     """Search the web for hotels, places, and travel information."""
@@ -14,14 +38,7 @@ async def tavily_search(query: str, max_results: int = 5):
     if max_results < 1:
         raise ValueError("max_results must be at least 1")
 
-    tools = await client.get_tools(server_name="Tavily_MCP")
-    search_tool = next(
-        (tool for tool in tools if tool.name == "tavily_search"),
-        None,
-    )
-
-    if search_tool is None:
-        raise RuntimeError("Tavily MCP does not provide the tavily_search tool")
+    search_tool = await _get_tavily_search_tool()
 
     results = []
     response = await search_tool.ainvoke(
